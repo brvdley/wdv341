@@ -1,25 +1,17 @@
 <?php
-//Model-Controller Area.  The PHP processing code goes in this area. 
+//Model-Controller Area.  The PHP processing code goes in this area.
 
-	//Method 1.  This uses a loop to read each set of name-value pairs stored in the $_POST array
-	$tableBody = "";		//use a variable to store the body of the table being built by the script
-	
-	foreach($_POST as $key => $value)		//This will loop through each name-value in the $_POST array
-	{
-		$tableBody .= "<tr>";				//formats beginning of the row
-		$tableBody .= "<td>$key</td>";		//dsiplay the name of the name-value pair from the form
-		$tableBody .= "<td>$value</td>";	//dispaly the value of the name-value pair from the form
-		$tableBody .= "</tr>";				//End this row
-	} 
-	
-	
 	//Method 2.  This method pulls the individual name-value pairs from the $_POST using the name
-	//as the key in an associative array.  
-	
+	//as the key in an associative array.
+
 	$inFirstName = $_POST["firstName"];		//Get the value entered in the first name field
 	$inLastName = $_POST["lastName"];		//Get the value entered in the last name field
-	$inSchool = $_POST["school"];			//Get the value entered in the school field
-	
+	$inSchool = $_POST["school"];  //Get the value entered in the school field
+  $inRadio = $_POST["radioGroup"];
+  $inCheck1 = $_POST["check1"];	//get the value chosen from radio
+  $inCheck2 = $_POST["check2"];
+  $inCheck3 = $_POST["check3"];
+
 
 ?>
 <!DOCTYPE html>
@@ -31,23 +23,46 @@
 <body>
 <h1>WDV341 Intro PHP</h1>
 <h2>Form Handler Result Page - Code Example</h2>
-<p>This page displays the results of the Server side processing. </p>
-<p>The PHP page has been formatted to use the Model-View-Controller (MVC) concepts. </p>
-<h3>Display the values from the form using Method 1. Uses a loop to process through the $_POST array</h3>
-<p>
-	<table border='a'>
-    <tr>
-    	<th>Field Name</th>
-        <th>Value of Field</th>
-    </tr>
-	<?php echo $tableBody;  ?>
-	</table>
+
+<form id="form1" name="form1" method="post" action="formHandler.php">
+  <p>First Name:
+    <input type="text" name="firstName" id="firstName" />
 </p>
+  <p>Last Name:
+    <input type="text" name="lastName" id="lastName" />
+  </p>
+  <p>School:
+    <input type="text" name="school" id="school" />
+  </p>
+  <p>Check One:
+    <input type="radio" name="radioGroup" value="Guess 1" id="radio1" />
+    <input type="radio" name="radioGroup" value="Guess 2" id="radio2" />
+    <input type="radio" name="radioGroup" value="Guess 3" id="radio3" />
+</p>
+<p>Check As Many As You'd Like:
+  <input type="checkbox" name="check1" value="Option 1" id="check1" />
+  <input type="checkbox" name="check2" value="Option 2" id="check2" />
+  <input type="checkbox" name="check3" value="Option 3" id="check3" />
+  <input type="checkbox" name="check4" value="Option 4" id="check4" />
+</p>
+  <p>
+    <input type="submit" name="button" id="button" value="Submit" />
+    <input type="reset" name="button2" id="button2" value="Reset" />
+  </p>
+</form>
+
 <h3>Display the values from the form using Method 2. Displays the individual values.</h3>
+<?php $honeypot = FALSE;
+if (!empty($_REQUEST['check4']) && (bool) $_REQUEST['check4'] == TRUE) {
+    $honeypot = TRUE;
+    log_spambot($_REQUEST);
+    # treat as spambot
+} else { ?>
 <p>School: <?php echo $inSchool; ?></p>
 <p>First Name: <?php echo $inFirstName; ?></p>
 <p>Last Name: <?php echo $inLastName; ?></p>
-
-
+<p>Chosen Guess: <?php echo $inRadio; ?></p>
+<p>Chosen Option/s: <?php echo $inCheck1; ?>, <?php echo $inCheck2; ?>, <?php echo $inCheck3; ?></p>
+<?php } ?>
 </body>
 </html>
