@@ -45,14 +45,17 @@ if ($validateTool->validateRequiredStringField($inName)) {
         $successMessage = "";
       }
       	if ($isValid1 && $isValid2 && $isValid3) {
-
-          $sql = "
-
-          INSERT INTO contact_insert (id, brvdleyo_name, brvdleyo_email, brvdleyo_message)
-          VALUES (NULL, '$inName', '$inEmail', '$inText');
-
-          ";
-          $conn->exec($sql);
+        try {
+          $sql = "INSERT INTO contact_insert (id, brvdleyo_name, brvdleyo_email, brvdleyo_message) VALUES (NULL, :name, :email, :text);";
+          $statement = $conn->prepare($sql);
+          $statement->bindParam(":name", $inName);
+          $statement->bindParam(":email", $inEmail);
+          $statement->bindParam(":text", $inText);
+          $statement->execute();
+        }
+        catch (PDOException $e) {
+            echo "Process Failed: " . $e->getMessage();
+        }
           $allCorrect = true;
           $errorMessage1 = "";
           $errorMessage2 = "";
@@ -63,7 +66,7 @@ if ($validateTool->validateRequiredStringField($inName)) {
           $inText = '';
         }
 }
-
+$conn->null;
  ?>
  <!DOCTYPE html>
  <html lang="en" dir="ltr">
@@ -73,80 +76,14 @@ if ($validateTool->validateRequiredStringField($inName)) {
      <link rel="stylesheet" href="recipeCSS.css" type="text/css">
      <meta name="viewport" content="width=device-width, initial-scale=1">
      <link rel="shortcut icon" type="image/x-icon" href="assets/favi.png" />
+     <script>console.log("View the repo on this project: https://github.com/brvdley/wdv341/tree/master/recipeManager")</script>
      <style>
-     .form {
-       height: 60%;
-       width: 100%;
-       display: flex;
-       align-items: center;
-       justify-content: flex-start;
-       flex-flow: column wrap;
-     }
-     .contact {
-       height: 80%;
-       width: 40%;
-       background-color: white;
-       display: flex;
-       align-items: center;
-       justify-content: space-around;
-       flex-flow: column nowrap;
-       border-radius: 8px;
-       border: 2px solid #F3E6A5;
-     }
 
-     #one, #two, #three {
-       margin: 5px;
-       padding: 0;
-       display: flex;
-       flex-flow: column wrap;
-       width: 100%;
-       align-items: center;
-     }
-
-     #four {
-     margin: 5px;
-     padding: 0;
-     display: flex;
-     flex-flow: row nowrap;
-     width: 100%;
-     align-items: center;
-     justify-content: center;
-   }
-
-    #four input {
-      height: 30px;
-      width: 80px;
-      margin: 5px;
-      background-color: #A49E80 !important;
-      color: white;
-      font-weight: bold;
-      border: 2px solid #F3E6A5 !important;
-      border-radius: 8px;
-    }
-    #four input:hover {
-      opacity: .8;
-      cursor: pointer;
-    }
-     .contact div input[type="text"]{
-       height: 30px;
-       width: 400px;
-       border: 2px solid #F3E6A5;
-       border-radius: 8px;
-       font-size: 15px;
-
-     }
-     .contact textarea {
-       height: 100px;
-       width: 400px;
-       border: 2px solid #F3E6A5;
-       border-radius: 8px;
-       font-size: 15px;
-     }
 
      </style>
    </head>
 
-   <body>
+   <body class="cMain">
      <div class="bContainer">
        <div class="nContainer">
          <header>
@@ -158,11 +95,21 @@ if ($validateTool->validateRequiredStringField($inName)) {
              <a href="recipeList.php" id="recipes"><li id="second"><img src="https://img.icons8.com/metro/24/000000/book.png" style="transform: scale(.8); margin-right: 5px; margin-bottom: 2px;">Recipes</li></a>
              <a href="recipeContact.php" id="contact"><li id="third"><img src="https://img.icons8.com/windows/24/000000/help.png" style="margin-right: 5px; margin-bottom: 2px;">Contact Us</li></a>
            </ul>
+           <div class="ham" id="#ham" onclick="hide()">
+             <div class="bar1"></div>
+             <div class="bar2"></div>
+             <div class="bar3"></div>
+           </div>
            <div class="search">
              <script async src="https://cse.google.com/cse.js?cx=001410868451250937928:61a6ksh4bhv"></script>
              <div class="gcse-search"></div>
            </div>
          </nav>
+         <div class="pages" id="#pages">
+           <a href="recipeIndex.php" id="home2"><img src="https://img.icons8.com/material-outlined/24/000000/home--v2.png" style="margin-right: 5px;">Home</a>
+           <a href="recipeList.php" id="recipes2"><img src="https://img.icons8.com/metro/24/000000/book.png" style="transform: scale(.8); margin-right: 5px; margin-bottom: 2px;">Recipes</a>
+           <a href="recipeContact.php" id="contact2"><img src="https://img.icons8.com/windows/24/000000/help.png" style="margin-right: 5px; margin-bottom: 2px;">Contact Us</a>
+         </div>
        </div>
        <main>
         <div class="Rcontainer">
@@ -225,6 +172,19 @@ if ($validateTool->validateRequiredStringField($inName)) {
        document.querySelector('input[type="text"]').value = '';
        document.querySelector('textarea').value = '';
      }
+       function hide() {
+         var x = document.querySelector('.pages');
+         var y = document.querySelector('.nContainer');
+         var z = document.querySelector('.cMain');
+     if (x.style.display === "flex") {
+       x.style.display = "none";
+       y.style.height = "20%";
+     } else {
+       x.style.display = "flex";
+       y.style.height = "30%";
+       z.style.height = "220vh";
+     }
+       }
      </script>
    </body>
  </html>

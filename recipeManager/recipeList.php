@@ -4,43 +4,18 @@ require_once('brvdleyoConnect.php'); // server sql connection
 
 define('IMAGE_DIR','assets/');
 
-$easy = "<img src='assets/easy.png' alt='Easy Difficulty' title='Difficulty of the Recipe.'>";
-$med = "<img src='assets/med.png' alt='Medium Difficulty' title='Difficulty of the Recipe.'>";
-$hard = "<img src='assets/hard.png' alt='Hard Difficulty' title='Difficulty of the Recipe.'>";
-
 $sql = "SELECT recipe_name,recipe_image,recipe_difficulty,recipe_instructions,recipe_servings,cook_time,prep_time FROM rec WHERE recipe_name= 'Crockpot Chili'; ";
 $sql2 = "SELECT recipe_name,recipe_image,recipe_difficulty,recipe_instructions,recipe_servings,cook_time,prep_time FROM rec WHERE recipe_name= 'Sugar Cookies';";
 $sql3 = "SELECT recipe_name,recipe_image,recipe_difficulty,recipe_instructions,recipe_servings,cook_time,prep_time FROM rec WHERE recipe_name= 'French Omelet';";
 
 $sth = $conn->prepare($sql);
-$sth->bindParam('recipe_name', $bpName1, PDO::PARAM_STR, 100);
-$sth->bindParam('recipe_image', $bpImage1, PDO::PARAM_STR, 100);
-$sth->bindParam('recipe_difficulty', $bpDiff1, PDO::PARAM_INT, 11);
-$sth->bindParam('recipe_instructions', $bpInst1, PDO::PARAM_STR, 1000);
-$sth->bindParam('recipe_servings', $bpServ1, PDO::PARAM_INT, 11);
-$sth->bindParam('cook_time', $bpCook1, PDO::PARAM_STR, 100);
-$sth->bindParam('prep_time', $bpPrep1, PDO::PARAM_STR, 100);
 $sth->execute();
 
 
 $sth2 = $conn->prepare($sql2);
-$sth2->bindParam('recipe_name', $bpName2, PDO::PARAM_STR, 100);
-$sth2->bindParam('recipe_image', $bpImage2, PDO::PARAM_STR, 100);
-$sth2->bindParam('recipe_difficulty', $bpDiff2, PDO::PARAM_INT, 11);
-$sth2->bindParam('recipe_instructions', $bpInst2, PDO::PARAM_STR, 1000);
-$sth2->bindParam('recipe_servings', $bpServ2, PDO::PARAM_INT, 11);
-$sth2->bindParam('cook_time', $bpCook2, PDO::PARAM_STR, 100);
-$sth2->bindParam('prep_time', $bpPrep2, PDO::PARAM_STR, 100);
 $sth2->execute();
 
 $sth3 = $conn->prepare($sql3);
-$sth3->bindParam('recipe_name', $bpName3, PDO::PARAM_STR, 100);
-$sth3->bindParam('recipe_image', $bpImage3, PDO::PARAM_STR, 100);
-$sth3->bindParam('recipe_difficulty', $bpDiff3, PDO::PARAM_INT, 11);
-$sth3->bindParam('recipe_instructions', $bpInst3, PDO::PARAM_STR, 1000);
-$sth3->bindParam('recipe_servings', $bpServ3, PDO::PARAM_INT, 11);
-$sth3->bindParam('cook_time', $bpCook3, PDO::PARAM_STR, 100);
-$sth3->bindParam('prep_time', $bpPrep3, PDO::PARAM_STR, 100);
 $sth3->execute();
 
 
@@ -73,7 +48,7 @@ foreach ($sth3->fetchall(PDO::FETCH_ASSOC) as $row) {
   $cook3 = $row['cook_time'];
   $prep3 = $row['prep_time'];
 }
-
+$conn->null;
 ?>
 
 <!DOCTYPE html>
@@ -85,12 +60,7 @@ foreach ($sth3->fetchall(PDO::FETCH_ASSOC) as $row) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/favi.png" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-
-    $(document).ready(function() {
-
-    });
-    </script>
+    <script>console.log("View the repo on this project: https://github.com/brvdley/wdv341/tree/master/recipeManager")</script>
   </head>
 
   <body id="list">
@@ -105,11 +75,21 @@ foreach ($sth3->fetchall(PDO::FETCH_ASSOC) as $row) {
             <a href="recipeList.php" id="recipes"><li id="second"><img src="https://img.icons8.com/metro/24/000000/book.png" style="transform: scale(.8); margin-right: 5px; margin-bottom: 2px;">Recipes</li></a>
             <a href="recipeContact.php" id="contact"><li id="third"><img src="https://img.icons8.com/windows/24/000000/help.png" style="margin-right: 5px; margin-bottom: 2px;">Contact Us</li></a>
           </ul>
+          <div class="ham" id="#ham" onclick="hide()">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+          </div>
           <div class="search">
             <script async src="https://cse.google.com/cse.js?cx=001410868451250937928:61a6ksh4bhv"></script>
             <div class="gcse-search"></div>
           </div>
         </nav>
+        <div class="pages" id="#pages">
+          <a href="recipeIndex.php" id="home2"><img src="https://img.icons8.com/material-outlined/24/000000/home--v2.png" style="margin-right: 5px;">Home</a>
+          <a href="recipeList.php" id="recipes2"><img src="https://img.icons8.com/metro/24/000000/book.png" style="transform: scale(.8); margin-right: 5px; margin-bottom: 2px;">Recipes</a>
+          <a href="recipeContact.php" id="contact2"><img src="https://img.icons8.com/windows/24/000000/help.png" style="margin-right: 5px; margin-bottom: 2px;">Contact Us</a>
+        </div>
       </div>
       <main class="mList">
         <div class="Rcontainer">
@@ -166,6 +146,18 @@ foreach ($sth3->fetchall(PDO::FETCH_ASSOC) as $row) {
     </div>
   </body>
   <script>
+    function hide() {
+      var x = document.querySelector('.pages');
+      var y = document.querySelector('.nContainer');
+  if (x.style.display === "flex") {
+    x.style.display = "none";
+    y.style.height = "10%";
+  } else {
+    x.style.display = "flex";
+    y.style.height = "13%";
+  }
+    }
+
   $('#beans').click(function() {
     $('.omelet').remove();
     $('.sugar').remove();
