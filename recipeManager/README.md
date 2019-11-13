@@ -1,2 +1,5 @@
-# Recipe Manager Project for WDV321
-Here you will see the project I worked on. This is uploaded to git to get across the PHP aspects as well as just help sharing the AJAX concepts.
+# WDV321 - Advanced Javascript
+## Recipe Manager Project
+This project was created to showcase my skills in using AJAX. I incorporated
+PDO aspects by bringing in images and other elements from a MySQL Database.
+I also incorporated mobile responsiveness, and PHP form validation.
