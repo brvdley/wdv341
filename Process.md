@@ -1,6 +1,6 @@
 # BrvdleyOwens 10 Step Workflow Process.
 
-_CTRL + SHIFT + M to view formatted version._
+_CTRL + SHIFT + M to view formatted version on Atom._
 
 ## Step 1 - Discuss Client Needs/Ideas
 In this step the main focus is to gather a clients ideas and needs in their website
