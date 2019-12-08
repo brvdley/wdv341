@@ -1,6 +1,7 @@
 <?php
 include 'FormValidation.php';
-require_once("brvdleyoConnect.php");
+require_once("localhostConnect.php");
+session_start();
 
 $validateTool = new FormValidation();
 
@@ -26,6 +27,9 @@ $test1 = 'am';
 $test2 = 'pm';
 $isPM = false;
 $radioS = '';
+if(!$_SESSION['validUser']) {
+  header("Location: login.php");
+}
 if (isset($_POST['submit'])) {
   if (isset($_POST['time'])) {
     $radioS = $_POST['time'];
@@ -199,6 +203,8 @@ if ($validateTool->validateRequiredStringField($inName)) {
     }
    </style>
    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+   <script>console.log("View the code at https://github.com/brvdley/wdv341/tree/master/eventSql");</script>
+
  </head>
 
  <body>
