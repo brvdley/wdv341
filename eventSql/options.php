@@ -18,6 +18,7 @@ if (!$validUser) {
       <nav>
         <ul class="nwrapper">
           <a href="options.php"><li id="home">Home</li></a>
+          <p>Welcome <?php echo $_SESSION['userName'];?>!</p>
           <a href="logout.php"><li id="logout">Logout</li></a>
         </ul>
       </nav>
@@ -26,8 +27,8 @@ if (!$validUser) {
           <h3>Admin Database Options</h3>
           <div class="scontainer">
             <a href="insertPreparedStatement.php"><h4>Insert Item Into Database</h4></a>
-            <a href="delete.php"><h4>Delete Item From Database</h4></a>
-            <a href="update.php"><h4>Update Item In Database</h4></a>
+            <a href="selectEventsDelete.php"><h4>Delete Item From Database</h4></a>
+            <a href="selectEventsUpdate.php"><h4>Update Item In Database</h4></a>
           </div>
         </div>
         <div class="gwrapper">

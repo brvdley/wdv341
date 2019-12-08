@@ -1,5 +1,5 @@
 <?php
-require_once("localhostConnect.php");
+require_once("brvdleyoConnect.php");
 session_start();
 $u = '';
 $p = '';
@@ -21,6 +21,7 @@ else if (isset($_POST['submit'])) {
     $user = $statement->fetch(PDO::FETCH_ASSOC);
     if ($user) {
       $_SESSION['validUser'] = true;
+      $_SESSION['userName'] = $u;
       header("Location: options.php");
     }
     else {$error ="Invalid Username or Password. Please Try Again.";}
@@ -56,7 +57,7 @@ else if (isset($_POST['submit'])) {
               <label>Password:
                 <input type="password" class="pass" name="pass" value="<?php echo $p;?>">
               </label>
-              <input type="submit" name="submit" value="submit">
+              <input type="submit" name="submit" value="Login">
             </form>
           </div>
         </div>

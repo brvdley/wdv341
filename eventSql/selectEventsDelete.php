@@ -1,5 +1,9 @@
 <?php
-require_once("localhostConnect.php");
+require_once("brvdleyoConnect.php");
+session_start();
+if(!$_SESSION['validUser']) {
+  header("Location: login.php");
+}
 $id='';
 echo "<table class='table' style='border: solid 1px black;'>";
 echo "<tr><th>Id</th><th>Event Name</th><th>Event Description</th><th>Event Presenter</th><th>Event Date</th><th>Event Time</th></tr>";
@@ -24,7 +28,7 @@ class TableRows extends RecursiveIteratorIterator {
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 try {
-           $sql = "SELECT * FROM wdv341_event";
+           $sql = "SELECT * FROM events";
            $statement = $conn->prepare($sql);
            $statement->execute();
 
@@ -39,7 +43,7 @@ echo "</table>";
 if (isset($_GET['delete'])) {
   $id = $_GET['id'];
   try {
-    $sql = "DELETE FROM wdv341_event WHERE event_id = :id;";
+    $sql = "DELETE FROM events WHERE events_id = :id;";
     $statement = $conn->prepare($sql);
     $statement->bindparam(":id", $id);
     $statement->execute();

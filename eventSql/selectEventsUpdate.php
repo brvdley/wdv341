@@ -1,5 +1,9 @@
 <?php
-require_once("localhostConnect.php");
+require_once("brvdleyoConnect.php");
+session_start();
+if(!$_SESSION['validUser']) {
+  header("Location: login.php");
+}
 $id = '';
 $upid = '';
 $name = '';
@@ -36,7 +40,7 @@ class TableRows extends RecursiveIteratorIterator {
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 try {
-           $sql = "SELECT * FROM wdv341_event";
+           $sql = "SELECT * FROM events";
            $statement = $conn->prepare($sql);
            $statement->execute();
 
@@ -60,35 +64,35 @@ if (isset($_GET['update'])) {
   $hour = $_GET['columnhour'];
   $min = $_GET['columnmin'];
   if ($_GET['columnid'] != '') {
-    $sql = 'UPDATE wdv341_event SET event_id = :upid WHERE event_id = :id';
+    $sql = 'UPDATE events SET events_id = :upid WHERE events_id = :id';
     $statement = $conn->prepare($sql);
     $statement->bindparam(":id", $id);
     $statement->bindparam(":upid", $upid);
     $statement->execute();
   }
   if ($_GET['columnname'] != '') {
-    $sql = 'UPDATE wdv341_event SET event_name = :name WHERE event_id = :id';
+    $sql = 'UPDATE events SET events_name = :name WHERE events_id = :id';
     $statement = $conn->prepare($sql);
     $statement->bindparam(":id", $id);
     $statement->bindparam(":name", $name);
     $statement->execute();
   }
   if ($_GET['columndesc'] != '') {
-    $sql = 'UPDATE wdv341_event SET event_description = :desc WHERE event_id = :id';
+    $sql = 'UPDATE events SET events_description = :desc WHERE events_id = :id';
     $statement = $conn->prepare($sql);
     $statement->bindparam(":id", $id);
     $statement->bindparam(":desc", $desc);
     $statement->execute();
   }
   if ($_GET['columnpres'] != '') {
-    $sql = 'UPDATE wdv341_event SET event_presenter = :pres WHERE event_id = :id';
+    $sql = 'UPDATE events SET events_presenter = :pres WHERE events_id = :id';
     $statement = $conn->prepare($sql);
     $statement->bindparam(":id", $id);
     $statement->bindparam(":pres", $pres);
     $statement->execute();
   }
   if ($_GET['columnday'] != '' && $_GET['columnmon'] != '' && $_GET['columnyear'] != ''){
-    $sql = 'UPDATE wdv341_event SET event_date = :day WHERE event_id = :id';
+    $sql = 'UPDATE events SET events_date = :day WHERE events_id = :id';
     $formattedDate = date("Y-m-d", mktime(0,0,0,$month,$day,$year));
     $statement = $conn->prepare($sql);
     $statement->bindparam(":id", $id);
@@ -102,7 +106,7 @@ if (isset($_GET['update'])) {
 
     if ($isPM) {$hour += 12;};
     $formattedTime = date("H:i:s", mktime($hour,$min,0));
-    $sql = 'UPDATE wdv341_event SET event_time = :tim WHERE event_id = :id';
+    $sql = 'UPDATE events SET events_time = :tim WHERE events_id = :id';
     $statement = $conn->prepare($sql);
     $statement->bindparam(":id", $id);
     $statement->bindparam(":tim", $formattedTime);
