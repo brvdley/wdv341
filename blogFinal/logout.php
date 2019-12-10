@@ -7,7 +7,7 @@ header("Location: login.php");
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Blog Logout</title>
+    <title>Blog | Logout</title>
   </head>
   <body>
 

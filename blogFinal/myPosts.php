@@ -32,7 +32,7 @@ $id = '';
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <meta charset="utf-8">
-    <title>Blog Home</title>
+    <title>Blog | My Posts</title>
     <link rel="stylesheet" href="login.css" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Chicle&display=swap" rel="stylesheet">
   </head>

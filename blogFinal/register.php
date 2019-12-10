@@ -1,6 +1,7 @@
 <?php
 require_once("brvdleyoConnect.php");
 require_once("FormValidation.php");
+require_once("emailer.php");
 session_start();
 if ($_SESSION['validUser']) {
   header("Location: index.php");
@@ -9,7 +10,7 @@ $validateTool = new FormValidation();
 $u = '';
 $p = '';
 $rp = '';
-$e = '';
+$email = '';
 $isValid1 = '';
 $isValid2 = '';
 $isValid3 = '';
@@ -22,7 +23,7 @@ if (isset($_POST['submit'])) {
   $u = $_POST['user'];
   $p = $_POST['pass'];
   $rp = $_POST['rpass'];
-  $e = $_POST['email'];
+  $email = $_POST['email'];
   if ($validateTool->validateRequiredStringField($u)) {
     $isValid1 = true;
     }
@@ -50,7 +51,7 @@ if (isset($_POST['submit'])) {
           $errorMessage3 = "This field is Invalid";
           $successMessage = "";
         }
-        if ($validateTool->validateEmail($e)) {
+        if ($validateTool->validateEmail($email)) {
           $isValid4 = true;
           }
           else {
@@ -65,10 +66,13 @@ if (isset($_POST['submit'])) {
               $stmt->bindParam(':user', $u);
               $stmt->bindParam(':pass', $p);
               $stmt->execute();
+              $sending2 = new Emailer($email, 'Sent From: BradleyOwens126@gmail.com', 'Thanks for registering!', "Feel free to post or check out the site!");
+              $sending2->send();
               header("Location: login.php");
             }
             catch (PDOException $e) {
               echo "Process Failed: " . $e->getMessage();
+              $sending2 = new Emailer('bradleyowens126@gmail.com', 'Sent From: BradleyOwens126@gmail.com', 'Site Error', "$e->getMessage();");
             }
           }
       }
@@ -77,7 +81,7 @@ if (isset($_POST['submit'])) {
  <html lang="en" dir="ltr">
    <head>
      <meta charset="utf-8">
-     <title>Blog User Register</title>
+     <title>Blog | Register</title>
      <link rel="stylesheet" href="login.css" type="text/css">
      <link href="https://fonts.googleapis.com/css?family=Chicle&display=swap" rel="stylesheet">
    </head>
@@ -119,7 +123,7 @@ if (isset($_POST['submit'])) {
                <p class="error" style="margin: 1px;"><?php echo $errorMessage4; ?></p>
                <div class="user2">
                  <label for="email">Email -</label>
-                 <input type="email" class="email" name="email" value="<?php echo $e;?>">
+                 <input type="email" class="email" name="email" value="<?php echo $email;?>">
                </div>
                <input type="submit" name="submit" value="Register">
              </form>

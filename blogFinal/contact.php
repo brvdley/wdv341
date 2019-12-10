@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
  <html lang="en" dir="ltr">
    <head>
      <meta charset="utf-8">
-     <title>Blog User Register</title>
+     <title>Blog | Contact Us</title>
      <link rel="stylesheet" href="login.css" type="text/css">
      <link href="https://fonts.googleapis.com/css?family=Chicle&display=swap" rel="stylesheet">
    </head>

@@ -1,6 +1,7 @@
 <?php
 require_once("brvdleyoConnect.php");
 require_once("FormValidation.php");
+require_once("emailer.php");
 session_start();
 if (!$_SESSION['validUser']) {
   header("Location: login.php");
@@ -57,6 +58,8 @@ if(isset($_POST['post'])) {
         }
         catch (PDOException $e) {
           echo "Process Failed: " . $e->getMessage();
+          $sending2 = new Emailer('bradleyowens126@gmail.com', 'Sent From: BradleyOwens126@gmail.com', 'Site Error', "$e->getMessage();");
+          $sending2->send();
         }
       }
 }
@@ -67,7 +70,7 @@ if(isset($_POST['post'])) {
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Blog Home</title>
+    <title>Blog | Home</title>
     <link rel="stylesheet" href="login.css" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Chicle&display=swap" rel="stylesheet">
   </head>
@@ -128,6 +131,8 @@ if(isset($_POST['post'])) {
               }
               catch(PDOException $e) {
                 echo "Process Failed: " . $e->getMessage();
+                $sending2 = new Emailer('bradleyowens126@gmail.com', 'Sent From: BradleyOwens126@gmail.com', 'Site Error', "$e->getMessage();");
+                $sending2->send();
               }
               ?>
             </div>
