@@ -39,8 +39,6 @@ if (isset($_POST['submit'])) {
           $sending2->send();
   }
   }
-}
-$id = '';
 $id = '';
  ?>
 <!DOCTYPE html>
