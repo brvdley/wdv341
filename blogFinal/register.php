@@ -73,6 +73,7 @@ if (isset($_POST['submit'])) {
             catch (PDOException $e) {
               echo "Process Failed: " . $e->getMessage();
               $sending2 = new Emailer('bradleyowens126@gmail.com', 'Sent From: BradleyOwens126@gmail.com', 'Site Error', "$e->getMessage();");
+          $sending2->send();
             }
           }
       }

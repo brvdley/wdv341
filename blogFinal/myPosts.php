@@ -1,5 +1,6 @@
 <?php
 require_once("brvdleyoConnect.php");
+require_once("emailer.php");
 session_start();
 if (!$_SESSION['validUser']) {
   header("Location: login.php");
@@ -8,21 +9,36 @@ if (!$_SESSION['validUser']) {
 $u = $_SESSION['userName'];
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
+  try {
   $sql = "DELETE FROM blog_posts WHERE post_id = :id";
   $statement = $conn->prepare($sql);
   $statement->bindParam(':id', $id);
   $statement->execute();
   header("Location: myPosts.php");
+  }
+  catch (PDOException $e) {
+      echo "Process Failed: " . $e->getMessage();
+      $sending2 = new Emailer('bradleyowens126@gmail.com', 'Sent From: BradleyOwens126@gmail.com', 'Site Error', "$e->getMessage();");
+          $sending2->send();
+  }
 }
 if (isset($_POST['submit'])) {
   $cont = $_POST['edit'];
   $title = $_POST['title'];
+  try {
   $sql = "UPDATE blog_posts SET post_content = :content WHERE post_title = :title";
   $statement = $conn->prepare($sql);
   $statement->bindParam(':content', $cont);
   $statement->bindParam(':title', $title);
   $statement->execute();
   header("Location: myPosts.php");
+  }
+  catch (PDOException $e) {
+      echo "Process Failed: " . $e->getMessage();
+      $sending2 = new Emailer('bradleyowens126@gmail.com', 'Sent From: BradleyOwens126@gmail.com', 'Site Error', "$e->getMessage();");
+          $sending2->send();
+  }
+  }
 }
 $id = '';
 $id = '';
@@ -86,6 +102,8 @@ $id = '';
               }
               catch(PDOException $e) {
                 echo "Process Failed: " . $e->getMessage();
+                $sending2 = new Emailer('bradleyowens126@gmail.com', 'Sent From: BradleyOwens126@gmail.com', 'Site Error', "$e->getMessage();");
+          $sending2->send();
               }
               ?>
             </div>
