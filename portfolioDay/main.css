@@ -1,0 +1,427 @@
+@font-face {
+  font-family: "Bobo";
+  src: url("assets/Bobo (Regular).otf");
+}
+
+@font-face {
+  font-family: "Bobo_IE";
+  src: url("assets/Bobo (Regular).eot");
+}
+
+html {
+  width: 100%;
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: arial, helvetica, sans-serif;
+  background-color: white;
+  color: rgb(168,146,87);
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  letter-spacing: .4px;
+}
+
+#inputHeader h1, footer {
+  font-family: Bobo, Bobo_IE;
+}
+
+a {
+  color:rgb(168,146,87);
+  text-decoration: none;
+}
+
+.information {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 80vh;
+  flex-flow: column;
+}
+
+.info {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+}
+
+.bigLogo {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-flow: column;
+}
+
+.meta ul{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: row nowrap;
+  list-style: none; /* Remove default bullets */
+}
+
+.fContainer {
+  min-height: 80vh;
+  margin: 10vh 0 10vh 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+}
+
+#input {
+  min-height: 70%;
+  min-width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  background-color: rgb(36,36,36);
+  box-shadow: 0px 5px 15px 5px rgba(0, 0 , 0, .4);
+}
+
+
+form {
+  min-height: 50vh;
+  min-width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: column;
+  background-color: rgb(36,36,36);
+  box-shadow: 0px 5px 15px 5px rgba(0, 0 , 0, .4);
+}
+
+#error {
+  color: red;
+  margin: 1px;
+  padding: 0;
+}
+
+.lrow1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-flow: column;
+  height: 15vh;
+  width: 90%;
+}
+
+#success  {
+  color: green;
+  margin: 1px;
+  padding: 0;
+}
+.pass, .user {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 45%;
+  height: 30%;
+}
+
+.rrow1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-flow: row;
+  height: 8vh;
+  width: 55%;
+}
+
+.lrow2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-flow: row;
+  height: 8vh;
+  width: 40%;
+}
+
+.row1, .row2, .row3, .row4, .row5, .row6, .row8 {
+  height: 8vh;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-flow: row;
+}
+
+.row7 {
+  height: 8vh;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-flow: row;
+}
+
+.row1 input, .row2 input, .row3 input, .row4 input, .row5 input, .row6 input, .row7 input {
+  height: 30%;
+  width: 35%;
+}
+
+.lrow2 input {
+  height: 60%;
+  width: 45%;
+  background-color: white;
+  color: black;
+  border: 2px solid rgb(168,146,87);
+  font-size: 15px;
+}
+
+.row8 input {
+  height: 60%;
+  width: 30%;
+  background-color: white;
+  color: black;
+  border: 2px solid rgb(168,146,87);
+  font-size: 15px;
+}
+
+.lrow3 {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex-flow: row;
+  bottom: 0;
+  height: 50%;
+  width: 100%;
+}
+
+.lrow3 input{
+  width: 100%;
+  height: 100%;
+  background-color: rgb(36,36,36);
+  color: white;
+  border: 2px solid white;
+  font-size: 18px;
+  font-family: Bobo;
+}
+
+.lrow3 a {
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  bottom: 0;
+  align-items: flex-end;
+  justify-content: center;
+  flex-flow: row;
+}
+
+#show {
+  filter: brightness(0) invert(1);
+  cursor: pointer;
+}
+
+input[type="button"], input[type="submit"], input[type="reset"] {
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+}
+
+input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+  opacity: .8;
+}
+
+li {
+  color: white;
+  font-family: Bobo, Bobo_IE;
+  margin-left: 17px;
+  text-align: center;
+}
+
+.title {
+  height: 50%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-flow: column;
+  font-family: Bobo, Bobo_IE;
+  color: white;
+  margin: 15px 0 0 0;
+  padding: 0;
+}
+
+.meta {
+  height: 50%;
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.title h1 {
+  margin: 1px;
+  padding: 0;
+  text-align: center;
+}
+
+ul #time::before, ul #date::before {
+  content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: rgb(168,146,87); /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1em; /* Also needed for space (tweak if needed) */
+  margin-left:-1em; /* Also needed for space (tweak if needed) */
+}
+
+footer p {
+  opacity: 1;
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+  font-size: 10px;
+}
+
+#inputHeader {
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  justify-content: center;
+  width: 100%;
+  height: 30%;
+}
+
+footer p:hover {
+  opacity: .8;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.wrapper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  background-image: url(assets/splashBackground.jpg);
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: scroll;
+  margin-top: 0px;
+}
+
+.social {
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-flow: row;
+}
+
+.social img {
+  opacity: 1;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.social img:hover {
+  opacity: .8;
+}
+
+footer {
+  bottom: 0;
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(56,56,56);
+}
+
+.smallLogo {
+  display: none;
+  height: 50%;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1200px) {
+.social {
+  width: 60%;
+}
+.smallLogo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-flow: column;
+
+}
+.bigLogo {
+  display: none;
+}
+.meta{
+  width: 100%;
+}
+.information {
+  width: 100%;
+}
+.info {
+  width: 100%;
+}
+.meta ul {
+  flex-wrap: wrap;
+}
+.lrow1 {
+  height: 25vh;
+  width: 100%;
+}
+.user {
+  width: 70%;
+}
+.pass {
+  width: 70%;
+}
+.rrow1 {
+  height: 25vh;
+  width: 100%;
+}
+.lrow2 {
+  margin-bottom: 10vh;
+}
+.row1, .row2, .row3, .row4, .row5, .row6, .row7 {
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-flow: column;
+}
+.row8 {
+  height: 20vh;
+  width: 100%;
+}
+#input, form {
+  max-width: 90%;
+}
+form {
+  padding: 10px;
+}
+input[type="button"], input[type="submit"], input[type="reset"] {
+  text-align: center;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+}
